@@ -33,9 +33,9 @@ code {
 <div class="reveal">
 <div class="slides">
 
-<section>
+<section data-auto-animate>
 <h1><span style="color: blue;">SAST</span></h1>
-<p><em>False Positives - The Hard Truth</em></p>
+<h2 style="text-transform: none;">False Positives - The Hard Truth</h2>
 <p><em>Oren Ish Shalom</em></p>
 <p>[&nbsp;
 <a href="https://www.linkedin.com/in/oren-ish-shalom-68156649/" target="_blank">
@@ -46,68 +46,22 @@ code {
 </p>
 </section>
 
-<section>
+<section data-auto-animate>
 <h1><span style="color: blue;">SAST</span></h1><br>
-<h2>Measurable</h2>
-<h2>Science</h2><br>
-<h1 style="font-size: 8vw;">📊 🔬 📈</h1>
+<h2 style="text-transform: none;">Measurable</h2>
+<h2 style="text-transform: none;">Science</h2><br>
+<h1 style="font-size: 6vw;">📊 🔬 📈</h1>
 </section>
 
-<section>
-<h2><span style="color: blue;">History</span></h2>
-<p><em>Big bang 💥</em></p>
-<p>Dinosaurs 🦕</p>
-<p><em>Alan M. Turing</em></p>
-<p><em>Cousot&nbsp;&nbsp;&&nbsp;&nbsp;Cousot</em></p>
+<section data-auto-animate>
+<h1><span style="color: blue;">SAST</span></h1>
+<p><em>Contribution</em></p>
+<p><em>Objective Evaluation</em></p>
+<p><em>Remediation Practices</em></p>
+<p><em>Dhscanner</em></p>
 </section>
 
-<section>
-<h2><em><span style="color: blue;">Turing</span></em></h2>
-<table style="border-collapse: collapse;">
-  <tr>
-    <td style="text-align: left; padding: 4px;"><em>Halts</em></td>
-    <td style="text-align: left; padding: 4px;">&nbsp;</td>
-    <td style="text-align: left; padding: 4px;">&nbsp;</td>
-    <td style="text-align: left; padding: 4px;">&nbsp;</td>
-    <td style="text-align: left; padding: 4px;">&nbsp;</td>
-    <td style="text-align: left; padding: 4px;">❔</td>
-  </tr>
-  <tr>
-    <td style="text-align: left; padding: 4px;"><em>Branch taken</em></td>
-    <td style="text-align: left; padding: 4px;">&nbsp;</td>
-    <td style="text-align: left; padding: 4px;">&nbsp;</td>
-    <td style="text-align: left; padding: 4px;">&nbsp;</td>
-    <td style="text-align: left; padding: 4px;">&nbsp;</td>
-    <td style="text-align: left; padding: 4px;">🤷</td>
-  </tr>
-  <tr>
-    <td style="text-align: left; padding: 4px;"><em>Reachable</em></td>
-    <td style="text-align: left; padding: 4px;">&nbsp;</td>
-    <td style="text-align: left; padding: 4px;">&nbsp;</td>
-    <td style="text-align: left; padding: 4px;">&nbsp;</td>
-    <td style="text-align: left; padding: 4px;">&nbsp;</td>
-    <td style="text-align: left; padding: 4px;">❔</td>
-  </tr>
-  <tr>
-    <td style="text-align: left; padding: 4px;"><em>Vulnerable</em></td>
-    <td style="text-align: left; padding: 4px;">&nbsp;</td>
-    <td style="text-align: left; padding: 4px;">&nbsp;</td>
-    <td style="text-align: left; padding: 4px;">&nbsp;</td>
-    <td style="text-align: left; padding: 4px;">&nbsp;</td>
-    <td style="text-align: left; padding: 4px;">🤷</td>
-  </tr>
-  <tr>
-    <td style="text-align: left; padding: 4px;"><em>Imported 3rd party</em></td>
-    <td style="text-align: left; padding: 4px;">&nbsp;</td>
-    <td style="text-align: left; padding: 4px;">&nbsp;</td>
-    <td style="text-align: left; padding: 4px;">&nbsp;</td>
-    <td style="text-align: left; padding: 4px;">&nbsp;</td>
-    <td style="text-align: left; padding: 4px;">❔</td>
-  </tr>
-</table>
-</section>
-
-<section>
+<section data-auto-animate>
 <h2><span style="color: blue;">Benchmark</span></h2>
 <h1 style="font-size: 10vw;">🏋️‍♂️</h1>
 <table class="no-lines">
@@ -195,9 +149,56 @@ code {
 </section>
 
 <section data-auto-animate>
-<h3><em><span style="color: blue;">CVE-2024-53995</span></em></h3>
+<h2><span style="color: blue;">Benchmark</span></h2>
+<p><em>renaming</em></p>
+<p><em>indentation</em></p>
+<p><em>original</em></p>
+<p><em>...</em></p>
+</section>
+
+<section data-auto-animate>
+<h2><span style="color: blue;">CVE-2023-43794</span></h2>
 <pre data-id="code-animation">
-<code data-line-numbers class="language-python">class LoginHandler(BaseHandler):
+<code data-line-numbers class="language-typescript">
+  async triggerList(args: any = {}) {
+
+    const response = await this.sqlClient.raw(
+      `select *, name as ... from ... and tbl='${args.tn}';`,
+    );
+
+</code>
+</pre>
+</section>
+
+<section data-auto-animate>
+<h2><span style="color: blue;">CVE-2023-43794</span></h2>
+<pre data-id="code-animation">
+<code data-line-numbers class="language-typescript">
+  async triggerList(args: any = {}) {
+
+    const response = await this.sqlClient.raw(
+      `select *, name as ... from ... and tbl=?;`,
+      [args.tn],
+    );
+
+</code>
+</pre>
+</section>
+
+<section data-auto-animate>
+<h2><span style="color: blue;">CVE-2023-43794</span></h2>
+<p><em>syntax</em></p>
+<p><em>primitive types</em></p>
+<p><em>shape</em></p>
+<p><em></em></p>
+</section>
+
+<section data-auto-animate>
+<h2><span style="color: blue;">CVE-2024-53995</span></h2>
+<pre data-id="code-animation">
+<code data-line-numbers class="language-python">from sickchill import env
+
+class LoginHandler(BaseHandler):
 
   def post(self, next_=None):
 
@@ -219,9 +220,11 @@ code {
 </section>
 
 <section data-auto-animate>
-<h3><em><span style="color: blue;">CVE-2024-53995</span></em></h3>
+<h2><span style="color: blue;">CVE-2024-53995</span></h2>
 <pre data-id="code-animation">
-<code data-line-numbers class="language-python">class LoginHandler(BaseHandler):
+<code data-line-numbers class="language-python">from sickchill import env
+
+class LoginHandler(BaseHandler):
 
   def post(self, next_=None):
 
@@ -244,7 +247,55 @@ code {
 </section>
 
 <section data-auto-animate>
-<h3><em><span style="color: blue;">CVE-2023-26494</span></em></h3>
+<h2><span style="color: blue;">CVE-2024-53995</span></h2>
+<pre data-id="code-animation">
+<code data-line-numbers="1,19" class="language-python">from sickchill import env
+
+class LoginHandler(BaseHandler):
+
+  def post(self, next_=None):
+
+    u = self.get_body_argument("username", None)
+    p = self.get_body_argument("password", None)
+
+    if (u == env.WEB_USERNAME and p == env.WEB_PASSWORD):
+
+      self.set_secure_cookie("sickchill_user", env.API_KEY)
+
+    else:
+      login_error = _("Incorrect username or password")
+
+    # next_ = self.get_query_argument("next", next_)
+    # self.redirect(next_ or "/" + env.DEFAULT_PAGE + "/")
+    self.redirect("/" + env.DEFAULT_PAGE + "/")
+
+</code>
+</pre>
+</section>
+
+<section data-auto-animate>
+<h2><span style="color: blue;">CVE-2024-53995</span></h2>
+<pre data-id="code-animation">
+<code data-line-numbers class="language-python">from sickchill import env
+
+    # next_ = self.get_query_argument("next", next_)
+    # self.redirect(next_ or "/" + env.DEFAULT_PAGE + "/")
+    self.redirect("/" + env.DEFAULT_PAGE + "/")
+
+</code>
+</pre>
+</section>
+
+<section data-auto-animate>
+<h2><span style="color: blue;">CVE-2024-53995</span></h2>
+<p><em>Cross File</em></p>
+<p><em>Type Resolution</em></p>
+<p><em>Method Override</em></p>
+<p><em>Class Inheritance</em></p>
+</section>
+
+<section data-auto-animate>
+<h2><em><span style="color: blue;">CVE-2023-26494</span></em></h2>
 <pre data-id="code-animation">
 <code data-line-numbers class="language-javascript">const url = ( location ) => {
 
@@ -267,7 +318,7 @@ const Login = () => {
 </section>
 
 <section data-auto-animate>
-<h3><em><span style="color: blue;">CVE-2023-26494</span></em></h3>
+<h2><span style="color: blue;">CVE-2023-26494</span></h2>
 <pre data-id="code-animation">
 <code data-line-numbers class="language-javascript">const url = ( location ) => {
 
@@ -294,9 +345,15 @@ const Login = () => {
 </pre>
 </section>
 
+<section data-auto-animate>
+<h2><span style="color: blue;">CVE-2023-26494</span></h2>
+<p><em>Partial taint</em></p>
+<p><em>Interprocedural</em></p>
+<p><em>Inline</em></p>
+</section>
 
 <section data-auto-animate>
-<h3><em><span style="color: blue;">CVE-2023-34105</span></em></h3>
+<h2><em><span style="color: blue;">CVE-2023-34105</span></em></h2>
 <pre data-id="code-animation">
 <code data-line-numbers class="language-golang">/*
 ./objs/ffmpeg/bin/ffmpeg            \
@@ -375,6 +432,61 @@ func (v *SnapshotJob) do(ffmpeg, inputUrl string) (err error) {
 </code>
 </pre>
 </section>
+
+
+<section>
+<h2><span style="color: blue;">History</span></h2>
+<p><em>Big bang 💥</em></p>
+<p><em>Dinosaurs 🦕</em></p>
+<p><em>Alan M. Turing</em></p>
+</section>
+
+<section>
+<h2><em><span style="color: blue;">Turing</span></em></h2>
+<table style="border-collapse: collapse;">
+  <tr>
+    <td style="text-align: left; padding: 4px;"><em>Halts</em></td>
+    <td style="text-align: left; padding: 4px;">&nbsp;</td>
+    <td style="text-align: left; padding: 4px;">&nbsp;</td>
+    <td style="text-align: left; padding: 4px;">&nbsp;</td>
+    <td style="text-align: left; padding: 4px;">&nbsp;</td>
+    <td style="text-align: left; padding: 4px;">❔</td>
+  </tr>
+  <tr>
+    <td style="text-align: left; padding: 4px;"><em>Branch taken</em></td>
+    <td style="text-align: left; padding: 4px;">&nbsp;</td>
+    <td style="text-align: left; padding: 4px;">&nbsp;</td>
+    <td style="text-align: left; padding: 4px;">&nbsp;</td>
+    <td style="text-align: left; padding: 4px;">&nbsp;</td>
+    <td style="text-align: left; padding: 4px;">🤷</td>
+  </tr>
+  <tr>
+    <td style="text-align: left; padding: 4px;"><em>Reachable</em></td>
+    <td style="text-align: left; padding: 4px;">&nbsp;</td>
+    <td style="text-align: left; padding: 4px;">&nbsp;</td>
+    <td style="text-align: left; padding: 4px;">&nbsp;</td>
+    <td style="text-align: left; padding: 4px;">&nbsp;</td>
+    <td style="text-align: left; padding: 4px;">❔</td>
+  </tr>
+  <tr>
+    <td style="text-align: left; padding: 4px;"><em>Vulnerable</em></td>
+    <td style="text-align: left; padding: 4px;">&nbsp;</td>
+    <td style="text-align: left; padding: 4px;">&nbsp;</td>
+    <td style="text-align: left; padding: 4px;">&nbsp;</td>
+    <td style="text-align: left; padding: 4px;">&nbsp;</td>
+    <td style="text-align: left; padding: 4px;">🤷</td>
+  </tr>
+  <tr>
+    <td style="text-align: left; padding: 4px;"><em>Imported 3rd party</em></td>
+    <td style="text-align: left; padding: 4px;">&nbsp;</td>
+    <td style="text-align: left; padding: 4px;">&nbsp;</td>
+    <td style="text-align: left; padding: 4px;">&nbsp;</td>
+    <td style="text-align: left; padding: 4px;">&nbsp;</td>
+    <td style="text-align: left; padding: 4px;">❔</td>
+  </tr>
+</table>
+</section>
+
 
 <section>
 <div style="display: flex; justify-content: center; width: 100%;">
