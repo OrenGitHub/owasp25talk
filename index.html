@@ -6,9 +6,9 @@
 
 <title>reveal.js</title>
 
-<link rel="stylesheet" href="dist/reset.css">
-<link rel="stylesheet" href="dist/reveal.css">
-<link rel="stylesheet" href="dist/theme/black.css">
+<link rel="stylesheet" href="node_modules/reveal.js/dist/reset.css">
+<link rel="stylesheet" href="node_modules/reveal.js/dist/reveal.css">
+<link rel="stylesheet" href="node_modules/reveal.js/dist/theme/black.css">
 
 <style>
 code {
@@ -27,8 +27,9 @@ code {
 </style>
 
 <!-- Theme used for syntax highlighted code -->
-<link rel="stylesheet" href="plugin/highlight/monokai.css">
+<link rel="stylesheet" href="node_modules/reveal.js/plugin/highlight/monokai.css">
 </head>
+
 <body>
 <div class="reveal">
 <div class="slides">
@@ -66,7 +67,7 @@ code {
 <h1 style="font-size: 10vw;">🏋️‍♂️</h1>
 <table class="no-lines">
   <tr>
-    <td style="text-align: center; padding: 4px;"><em>CVEs</em></td>
+    <td style="text-align: center; padding: 4px;">CVEs</td>
     <td style="text-align: left; padding: 4px;">&nbsp;</td>
     <td style="text-align: left; padding: 4px;">&nbsp;</td>
     <td style="text-align: left; padding: 4px;">&nbsp;</td>
@@ -86,7 +87,7 @@ code {
     <td style="text-align: center; padding: 4px;">Impact</td>
   </tr>
   <tr>
-    <td style="text-align: center; padding: 4px;"><em>Open Source</em></td>
+    <td style="text-align: center; padding: 4px;">Open Source</td>
     <td style="text-align: left; padding: 4px;">&nbsp;</td>
     <td style="text-align: left; padding: 4px;">&nbsp;</td>
     <td style="text-align: left; padding: 4px;">&nbsp;</td>
@@ -106,7 +107,7 @@ code {
     <td style="text-align: center; padding: 4px;">Diverse</td>
   </tr>
   <tr>
-    <td style="text-align: center; padding: 4px;"><em>Fixed</em></td>
+    <td style="text-align: center; padding: 4px;">Fixed</td>
     <td style="text-align: left; padding: 4px;">&nbsp;</td>
     <td style="text-align: left; padding: 4px;">&nbsp;</td>
     <td style="text-align: left; padding: 4px;">&nbsp;</td>
@@ -126,7 +127,7 @@ code {
     <td style="text-align: center; padding: 4px;">Popular</td>
   </tr>
   <tr>
-    <td style="text-align: center; padding: 4px;"><em>Recent</em></td>
+    <td style="text-align: center; padding: 4px;">Recent</td>
     <td style="text-align: left; padding: 4px;">&nbsp;</td>
     <td style="text-align: left; padding: 4px;">&nbsp;</td>
     <td style="text-align: left; padding: 4px;">&nbsp;</td>
@@ -150,16 +151,33 @@ code {
 
 <section data-auto-animate>
 <h2><span style="color: blue;">Benchmark</span></h2>
+<p><em>...</em></p>
+<p><em>original</em></p>
 <p><em>renaming</em></p>
 <p><em>indentation</em></p>
-<p><em>original</em></p>
-<p><em>...</em></p>
+</section>
+
+<section data-auto-animate>
+<h2><span style="color: blue;">CVE-2023-43794</span></h2><br>
+<h3 style="text-transform: none;">Motivating Example</h3>
+<div style="display: flex; justify-content: center; align-items: center; gap: 1em; margin-top: 1em;">
+<img src="images/nestjs_logo.svg" style="height: 2.5em;">
+<img src="images/typescript_logo.svg" style="height: 2em; margin-top: 0.5em;">
+</div>
 </section>
 
 <section data-auto-animate>
 <h2><span style="color: blue;">CVE-2023-43794</span></h2>
 <pre data-id="code-animation">
-<code data-line-numbers class="language-typescript">
+<code data-line-numbers class="language-typescript">import knex from 'knex'
+
+class SqliteClient {
+
+  constructor(...) {
+
+    this.sqlClient = knex(...);
+  }
+
   async triggerList(args: any = {}) {
 
     const response = await this.sqlClient.raw(
@@ -173,7 +191,15 @@ code {
 <section data-auto-animate>
 <h2><span style="color: blue;">CVE-2023-43794</span></h2>
 <pre data-id="code-animation">
-<code data-line-numbers class="language-typescript">
+<code data-line-numbers class="language-typescript">import knex from 'knex'
+
+class SqliteClient {
+
+  constructor(...) {
+
+    this.sqlClient = knex(...);
+  }
+
   async triggerList(args: any = {}) {
 
     const response = await this.sqlClient.raw(
@@ -187,9 +213,11 @@ code {
 
 <section data-auto-animate>
 <h2><span style="color: blue;">CVE-2023-43794</span></h2>
-<p><em>syntax</em></p>
-<p><em>primitive types</em></p>
-<p><em>shape</em></p>
+<p><em>types</em></p>
+<p><em>parsers</em></p>
+<p><em>syntax / shape</em></p>
+<p><em>constructors</em></p>
+<p><em>imports</em></p>
 <p><em></em></p>
 </section>
 
@@ -2091,11 +2119,11 @@ Slide 2
 </div>
 </div>
 
-        <script src="dist/reveal.js"></script>
-        <script src="plugin/notes/notes.js"></script>
-        <script src="plugin/markdown/markdown.js"></script>
-        <script src="plugin/highlight/highlight.js"></script>
-        <script src="plugin/math/math.js"></script>
+        <script src="node_modules/reveal.js/dist/reveal.js"></script>
+        <script src="node_modules/reveal.js/plugin/notes/notes.js"></script>
+        <script src="node_modules/reveal.js/plugin/markdown/markdown.js"></script>
+        <script src="node_modules/reveal.js/plugin/highlight/highlight.js"></script>
+        <script src="node_modules/reveal.js/plugin/math/math.js"></script>
         <script>
             // More info about initialization & config:
             // - https://revealjs.com/initialization/
