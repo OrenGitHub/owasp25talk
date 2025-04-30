@@ -525,6 +525,164 @@ class LoginHandler( BaseHandler ):
 </section>
 
 <section data-auto-animate>
+<h2><span style="color: blue;">CVE-2023-34105</span></h2>
+<pre data-id="code-animation">
+<code data-line-numbers class="language-golang">func (v *SnapshotJob) do(ffmpeg, inputUrl string) (err error) {
+
+    param := fmt.Sprintf(
+        "%v -i %v -vf fps=1 -vcodec png -f image2 ... ",
+        ffmpeg,
+        inputUrl,
+        v.vframes,
+        normalPicPath
+    )
+    
+    cmd := exec.CommandContext(ctx, "/bin/bash", "-c", param)
+    if err = cmd.Run(); err != nil { ... }
+}
+</code>
+</pre>
+</section>
+
+<section data-auto-animate>
+<h2><span style="color: blue;">CVE-2023-34105</span></h2>
+<pre data-id="code-animation">
+<code data-line-numbers class="language-golang">func (v *SnapshotJob) do(ffmpeg, inputUrl string) (err error) {
+
+    param := fmt.Sprintf(
+        "-i %v -vf fps=1 -vcodec png -f image2 ... ",
+        inputUrl,
+        v.vframes,
+        normalPicPath
+    )
+    
+    cmd := exec.CommandContext(ctx, ffmpeg, param)
+    if err = cmd.Run(); err != nil { ... }
+}
+</code>
+</pre>
+</section>
+
+<section data-auto-animate>
+<h2><span style="color: blue;">CVE-2023-34105</span></h2>
+<pre data-id="code-animation">
+<code data-line-numbers class="language-golang">//
+// 1. Interprocedural dataflow analysis 👈
+//
+func (v *SnapshotJob) do(ffmpeg, inputUrl string) (err error) {
+
+    param := fmt.Sprintf(
+        "-i %v -vf fps=1 -vcodec png -f image2 ... ",
+        inputUrl,
+        v.vframes,
+        normalPicPath
+    )
+    
+    cmd := exec.CommandContext(ctx, ffmpeg, param)
+    if err = cmd.Run(); err != nil { ... }
+}
+</code>
+</pre>
+</section>
+
+<section data-auto-animate>
+<h2><span style="color: blue;">CVE-2023-34105</span></h2>
+<pre data-id="code-animation">
+<code data-line-numbers class="language-golang">func (v *SnapshotJob) do(ffmpeg, inputUrl string) (err error) {
+
+    param := fmt.Sprintf(
+        "-i %v -vf fps=1 -vcodec png -f image2 ... ",
+        inputUrl,
+        v.vframes,
+        normalPicPath
+    )
+    
+    //
+    // 2. shape / syntax 👈
+    //
+    cmd := exec.CommandContext(ctx, ffmpeg, param)
+    if err = cmd.Run(); err != nil { ... }
+}
+</code>
+</pre>
+</section>
+
+<section data-auto-animate>
+<h2><span style="color: blue;">CVE-2024-47067</span></h2>
+<pre data-id="code-animation">
+<code data-line-numbers class="language-golang">import "github.com/gin-gonic/gin"
+
+func Plist(c *gin.Context) {
+
+  linkName_1    := strings.TrimSuffix(c.Param("link"),".plist")
+  linkName_2, _ := utils.SafeAtob( linkName_1 )
+  linkName_3    := strings.Split( linkName_2, "/" )
+  linkName_4    := linkName_3[0]
+  linkName_5, _ := url.PathUnescape( linkName_4 )
+  linkName_6, _ := url.Parse( linkName_5 )
+  Url := linkName_6.String()
+
+  plist := fmt.Sprintf(`<... version="1.0" ... %s ...>`, Url)
+  c.Writer.WriteString(plist)
+}
+</code>
+</pre>
+</section>
+
+<section data-auto-animate>
+<h2><span style="color: blue;">CVE-2024-47067</span></h2>
+<pre data-id="code-animation">
+<code data-line-numbers class="language-golang">import "github.com/gin-gonic/gin"
+
+func Plist(c *gin.Context) {
+
+  linkName_1    := strings.TrimSuffix(c.Param("link"),".plist")
+  linkName_2, _ := utils.SafeAtob( linkName_1 )
+  linkName_3    := strings.Split( linkName_2, "/" )
+  linkName_4    := linkName_3[0]
+  linkName_5, _ := url.PathUnescape( linkName_4 )
+  linkName_6, _ := url.Parse( linkName_5 )
+  Url := linkName_6.String()
+
+  Url = strings.ReplaceAll(Url, "<", "[")
+  Url = strings.ReplaceAll(Url, ">", "]")
+
+  plist := fmt.Sprintf(`<... version="1.0" ... %s ...>`, Url)
+  c.Writer.WriteString(plist)
+}
+</code>
+</pre>
+</section>
+
+<section data-auto-animate>
+<h2><span style="color: blue;">CVE-2024-47067</span></h2>
+<pre data-id="code-animation">
+<code data-line-numbers class="language-golang">import "github.com/gin-gonic/gin"
+
+func Plist(c *gin.Context) {
+
+  linkName_1    := strings.TrimSuffix(c.Param("link"),".plist")
+  linkName_2, _ := utils.SafeAtob( linkName_1 )
+  linkName_3    := strings.Split( linkName_2, "/" )
+  linkName_4    := linkName_3[0]
+  linkName_5, _ := url.PathUnescape( linkName_4 )
+  linkName_6, _ := url.Parse( linkName_5 )
+  Url := linkName_6.String()
+
+  //
+  // 1. context sensitive transformer 👈
+  //
+  Url = strings.ReplaceAll(Url, "<", "[")
+  Url = strings.ReplaceAll(Url, ">", "]")
+
+  plist := fmt.Sprintf(`<... version="1.0" ... %s ...>`, Url)
+  c.Writer.WriteString(plist)
+}
+</code>
+</pre>
+</section>
+
+<section data-auto-animate>
 <h2><em><span style="color: blue;">CVE-2023-26494</span></em></h2>
 <pre data-id="code-animation">
 <code data-line-numbers class="language-javascript">const url = ( location ) => {
@@ -656,88 +814,6 @@ class File( Resource ):
 </code>
 </pre>
 </section>
-
-<section data-auto-animate>
-<h2><em><span style="color: blue;">CVE-2023-34105</span></em></h2>
-<pre data-id="code-animation">
-<code data-line-numbers class="language-golang">/*
-./objs/ffmpeg/bin/ffmpeg            \
--i rtmp://127.0.0.1/live/livestream \
--vf fps=1 -vcodec png -f image2     \
-    ...
-*/
-
-func (v *SnapshotJob) do(ffmpeg, inputUrl string) (err error) {
-
-    param := fmt.Sprintf(
-        "%v -i %v -vf fps=1 -vcodec png -f image2 ... ",
-        ffmpeg,
-        inputUrl,
-        v.vframes,
-        normalPicPath
-    )
-    
-    cmd := exec.CommandContext(ctx, "/bin/bash", "-c", param)
-    if err = cmd.Run(); err != nil { ...
-
-</code>
-</pre>
-</section>
-
-<section data-auto-animate>
-<h3><em><span style="color: blue;">CVE-2023-34105</span></em></h3>
-<pre data-id="code-animation">
-<code data-line-numbers class="language-golang">/*
-./objs/ffmpeg/bin/ffmpeg            \
--i rtmp://127.0.0.1/live/livestream \
--vf fps=1 -vcodec png -f image2     \
-    ...
-*/
-
-func (v *SnapshotJob) do(ffmpeg, inputUrl string) (err error) {
-
-    param := fmt.Sprintf(
-        "-i %v -vf fps=1 -vcodec png -f image2 ... ",
-        inputUrl,
-        v.vframes,
-        normalPicPath
-    )
-    
-    cmd := exec.CommandContext(ctx, ffmpeg, param)
-    if err = cmd.Run(); err != nil { ...
-
-</code>
-</pre>
-</section>
-
-<section data-auto-animate>
-<h3><em><span style="color: blue;">CVE-2023-34105</span></em></h3>
-<pre data-id="code-animation">
-<code data-line-numbers class="language-golang">/*
-./objs/ffmpeg/bin/ffmpeg            \
--i rtmp://127.0.0.1/live/livestream \
--vf fps=1 -vcodec png -f image2     \
-    ...
-*/
-
-func (v *SnapshotJob) do(ffmpeg, inputUrl string) (err error) {
-
-    param := fmt.Sprintf(
-        "-i %v -vf fps=1 -vcodec png -f image2 ... ",
-        // ffmpeg
-        inputUrl,
-        v.vframes,
-        normalPicPath
-    )
-    
-    //                              ~~~~~~
-    cmd := exec.CommandContext(ctx, ffmpeg, param)
-    if err = cmd.Run(); err != nil { ...
-
-</code>
-</pre>
-</section>
-
 
 <section>
 <h2><span style="color: blue;">History</span></h2>
