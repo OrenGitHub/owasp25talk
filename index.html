@@ -335,44 +335,20 @@ class SqliteClient {
 </section>
 
 <section data-auto-animate>
-<h2><span style="color: blue;">CVE-2023-43794</span></h2>
-<p><em>types</em></p>
-<p><em>parsers</em></p>
-<p><em>syntax / shape</em></p>
-<p><em>constructors</em></p>
-<p><em>imports</em></p>
-<p><em></em></p>
-</section>
-
-<section>
-<div style="display: flex; justify-content: center; align-items: center; gap: 2.5rem;">
-<img src="images/javascript_logo.svg" height="80">
-<img src="images/java_logo.svg" height="80" style="transform: scale(1.8) translateY(-13px);">
-<img src="images/typescript_logo.svg" height="80">
-<img src="images/php_logo.svg" height="80" style="transform: scale(1.1);">
-<img src="images/ruby_logo.svg" height="80">
-<img src="images/golang_logo.svg" height="80" style="transform: scale(1.4);">
-<img src="images/python_logo.svg" height="80" style="transform: scale(1.2);">
-<img src="images/csharp_logo.svg" height="80" style="transform: scale(1.2);">
-</section>
-
-<section data-auto-animate>
 <h2><span style="color: blue;">CVE-2024-53995</span></h2>
 <pre data-id="code-animation">
 <code data-line-numbers class="language-python">from sickchill import env
 
-class LoginHandler(BaseHandler):
+class LoginHandler( BaseHandler ):
 
   def post(self, next_=None):
 
-    u = self.get_body_argument("username", None)
-    p = self.get_body_argument("password", None)
-
-    if (u == env.WEB_USERNAME and p == env.WEB_PASSWORD):
+    if ... == env.WEB_USERNAME and ... == env.WEB_PASSWORD:
 
       self.set_secure_cookie("sickchill_user", env.API_KEY)
 
     else:
+
       login_error = _("Incorrect username or password")
 
     next_ = self.get_query_argument("next", next_)
@@ -387,22 +363,20 @@ class LoginHandler(BaseHandler):
 <pre data-id="code-animation">
 <code data-line-numbers class="language-python">from sickchill import env
 
-class LoginHandler(BaseHandler):
+class LoginHandler( BaseHandler ):
 
   def post(self, next_=None):
 
-    u = self.get_body_argument("username", None)
-    p = self.get_body_argument("password", None)
-
-    if (u == env.WEB_USERNAME and p == env.WEB_PASSWORD):
+    if ... == env.WEB_USERNAME and ... == env.WEB_PASSWORD:
 
       self.set_secure_cookie("sickchill_user", env.API_KEY)
 
     else:
+
       login_error = _("Incorrect username or password")
 
-    # next_ = self.get_query_argument("next", next_)
-    # self.redirect(next_ or "/" + env.DEFAULT_PAGE + "/")
+    #
+    #...(next_ or "/" + env.DEFAULT_PAGE + "/")
     self.redirect("/" + env.DEFAULT_PAGE + "/")
 
 </code>
@@ -412,24 +386,52 @@ class LoginHandler(BaseHandler):
 <section data-auto-animate>
 <h2><span style="color: blue;">CVE-2024-53995</span></h2>
 <pre data-id="code-animation">
-<code data-line-numbers="1,19" class="language-python">from sickchill import env
+<code data-line-numbers class="language-python">#
+# 1. cross file 👈
+#
+from sickchill import env
 
-class LoginHandler(BaseHandler):
+class LoginHandler( BaseHandler ):
 
   def post(self, next_=None):
 
-    u = self.get_body_argument("username", None)
-    p = self.get_body_argument("password", None)
-
-    if (u == env.WEB_USERNAME and p == env.WEB_PASSWORD):
+    if ... == env.WEB_USERNAME and ... == env.WEB_PASSWORD:
 
       self.set_secure_cookie("sickchill_user", env.API_KEY)
 
     else:
+
       login_error = _("Incorrect username or password")
 
-    # next_ = self.get_query_argument("next", next_)
-    # self.redirect(next_ or "/" + env.DEFAULT_PAGE + "/")
+    #
+    #...(next_ or "/" + env.DEFAULT_PAGE + "/")
+    self.redirect("/" + env.DEFAULT_PAGE + "/")
+
+</code>
+</pre>
+</section>
+
+<section data-auto-animate>
+<h2><span style="color: blue;">CVE-2024-53995</span></h2>
+<pre data-id="code-animation">
+<code data-line-numbers class="language-python">from sickchill import env
+#
+# 2. class inheritance 👈
+#
+class LoginHandler( BaseHandler ):
+
+  def post(self, next_=None):
+
+    if ... == env.WEB_USERNAME and ... == env.WEB_PASSWORD:
+
+      self.set_secure_cookie("sickchill_user", env.API_KEY)
+
+    else:
+
+      login_error = _("Incorrect username or password")
+
+    #
+    #...(next_ or "/" + env.DEFAULT_PAGE + "/")
     self.redirect("/" + env.DEFAULT_PAGE + "/")
 
 </code>
@@ -441,8 +443,21 @@ class LoginHandler(BaseHandler):
 <pre data-id="code-animation">
 <code data-line-numbers class="language-python">from sickchill import env
 
-    # next_ = self.get_query_argument("next", next_)
-    # self.redirect(next_ or "/" + env.DEFAULT_PAGE + "/")
+class LoginHandler( BaseHandler ):
+
+  def post(self, next_=None):
+
+    if ... == env.WEB_USERNAME and ... == env.WEB_PASSWORD:
+
+      self.set_secure_cookie("sickchill_user", env.API_KEY)
+
+    else:
+
+      login_error = _("Incorrect username or password")
+
+    #
+    #                 3. type resolution 👈
+    #            |----------------------------|
     self.redirect("/" + env.DEFAULT_PAGE + "/")
 
 </code>
@@ -451,10 +466,62 @@ class LoginHandler(BaseHandler):
 
 <section data-auto-animate>
 <h2><span style="color: blue;">CVE-2024-53995</span></h2>
-<p><em>Cross File</em></p>
-<p><em>Type Resolution</em></p>
-<p><em>Method Override</em></p>
-<p><em>Class Inheritance</em></p>
+<pre data-id="code-animation">
+<code data-line-numbers class="language-python">from sickchill import env
+
+class LoginHandler( BaseHandler ):
+
+  def post(self, next_=None):
+
+    if ... == env.WEB_USERNAME and ... == env.WEB_PASSWORD:
+
+      self.set_secure_cookie("sickchill_user", env.API_KEY)
+
+    else:
+
+      login_error = _("Incorrect username or password")
+
+    self.redirect("/" + env.DEFAULT_PAGE + "/")
+    #------------|
+    #
+    # 4. method override 👈
+    #
+</code>
+</pre>
+</section>
+
+<section data-auto-animate>
+  <h2><span style="color: blue;">CVE-2024-53995</span></h2><br>
+  <table style="margin: 0 auto; border-collapse: collapse; border: 0.5px solid lightgreen;">
+    <tbody>
+      <tr>
+        <td colspan="2" style="border: 0.5px solid lightgreen; padding: 0.5em; text-align: center;">
+          <em>cross file</em>
+        </td>
+      </tr>
+      <tr>
+        <td style="border: 0.5px solid lightgreen; padding: 0.5em; text-align: center;"><em>class inheritance</em></td>
+        <td style="border: 0.5px solid lightgreen; padding: 0.5em; text-align: center;"><em>method override</em></td>
+      </tr>
+      <tr>
+        <td colspan="2" style="border: 0.5px solid lightgreen; padding: 0.5em; text-align: center;">
+          <em>type resolution</em>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+<div style="display: flex; justify-content: center; align-items: center; gap: 2.5rem;">
+<img src="images/javascript_logo.svg" height="80">
+<img src="images/java_logo.svg" height="80" style="transform: scale(1.8) translateY(-13px);">
+<img src="images/typescript_logo.svg" height="80">
+<img src="images/php_logo.svg" height="80" style="transform: scale(1.1);">
+<img src="images/ruby_logo.svg" height="80">
+<img src="images/golang_logo.svg" height="80" style="transform: scale(1.4);">
+<img src="images/python_logo.svg" height="80" style="transform: scale(1.2);">
+<img src="images/csharp_logo.svg" height="80" style="transform: scale(1.2);">
 </section>
 
 <section data-auto-animate>
@@ -513,6 +580,81 @@ const Login = () => {
 <p><em>Partial taint</em></p>
 <p><em>Interprocedural</em></p>
 <p><em>Inline</em></p>
+</section>
+
+<section data-auto-animate>
+<h2><span style="color: blue;">CVE-2023-50731</span></h2>
+<pre data-id="code-animation">
+<code data-line-numbers class="language-python">from flask_restx import Resource
+
+class File( Resource ):
+    def put(self, ... ):
+        data = {}
+        if ... :
+            data = request.json
+
+        if ... :
+
+            url = data['source']
+            data['file'] = data['name']
+
+            with requests.get(url, stream=True) as r:
+                fname = os.path.join(temp_dir, data['file'])
+
+                with open(fname, 'wb') as f:
+                    for chunk in r.iter_content():
+                        f.write(chunk)
+
+</code>
+</pre>
+</section>
+
+<section data-auto-animate>
+<h2><span style="color: blue;">CVE-2023-50731</span></h2>
+<pre data-id="code-animation">
+<code data-line-numbers class="language-python">from flask_restx import Resource
+
+class File( Resource ):
+    def put(self, ... ):
+        data = {}
+        if ... :
+            data = request.json
+
+        if ... :
+
+            url = data['source']
+            data['file'] = clear_filename(data['name'])
+
+            with requests.get(url, stream=True) as r:
+                fname = os.path.join(temp_dir, data['file'])
+
+                with open(fname, 'wb') as f:
+                    for chunk in r.iter_content():
+                        f.write(chunk)
+
+</code>
+</pre>
+</section>
+
+<section data-auto-animate>
+<h2><span style="color: blue;">CVE-2023-50731</span></h2>
+<pre data-id="code-animation">
+<code data-line-numbers class="language-python">def clear_filename(filename: str) -> str:
+    """
+    Removes path symbols from filename which
+    could be used for path injection
+    :param filename: input filename
+    :return: output filename
+    """
+
+    if not filename:
+        return filename
+    badchars = '\\/:*?\"<>|'
+    for c in badchars:
+        filename = filename.replace(c, '')
+    return filename
+</code>
+</pre>
 </section>
 
 <section data-auto-animate>
