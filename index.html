@@ -519,7 +519,7 @@ class LoginHandler( BaseHandler ):
 <img src="images/typescript_logo.svg" height="80">
 <img src="images/php_logo.svg" height="80" style="transform: scale(1.1);">
 <img src="images/ruby_logo.svg" height="80">
-<img src="images/golang_logo.svg" height="80" style="transform: scale(1.4);">
+<img src="images/golang_logo.svg" height="80" style="transform: scale(1.5) translateY(-3px);">
 <img src="images/python_logo.svg" height="80" style="transform: scale(1.2);">
 <img src="images/csharp_logo.svg" height="80" style="transform: scale(1.2);">
 </section>
@@ -605,6 +605,190 @@ func (v *SnapshotJob) do(ffmpeg, inputUrl string) (err error) {
 }
 </code>
 </pre>
+</section>
+
+<section data-auto-animate>
+  <h2><span style="color: blue;">CVE-2023-34105</span></h2><br>
+  <table style="margin: 0 auto; border-collapse: collapse; border: 0.5px solid lightgreen;">
+    <tbody>
+      <tr>
+        <td style="border: 0.5px solid lightgreen; padding: 0.5em; text-align: center;"><em>interprocedural</em></td>
+        <td style="border: 0.5px solid lightgreen; padding: 0.5em; text-align: center;"><em>taint analysis</em></td>
+      </tr>
+      <tr>
+        <td colspan="2" style="border: 0.5px solid lightgreen; padding: 0.5em; text-align: center;">
+          <em>syntax / shape</em>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section data-auto-animate>
+<h2><span style="color: blue;">CVE-2024-35451</span></h2>
+<pre data-id="code-animation">
+<code data-line-numbers class="language-php">class UserController extends Controller {
+  public function editIcons( Request $request ) {
+    $link = $request->input( ... );
+    $links = new Link;
+    $links->link = $link;
+    $links->user_id = $userId;
+    $links->save(); } }
+
+# dispatched by button press ( *.blade.php )
+#                ⬇️⬇️⬇️⬇️ 
+#   <img src="{{ getFavIcon($link->id) }}">
+
+function getFavIcon( $id ) {
+  $url = Link::find( $id )->link;
+  $ch = curl_init( $url );
+  $response = curl_exec( $ch );
+}
+</code>
+</pre>
+</section>
+
+<section data-auto-animate>
+<h2><span style="color: blue;">CVE-2024-35451</span></h2>
+<pre data-id="code-animation">
+<code data-line-numbers class="language-php">class UserController extends Controller {
+  public function editIcons( Request $request ) {
+    $link = $request->input( ... );
+    $links = new Link;
+    $links->link = $link;
+    $links->user_id = $userId;
+    $links->save(); } }
+
+# dispatched by button press ( *.blade.php )
+#                ⬇️⬇️⬇️⬇️ 
+#   <img src="{{ getFavIcon($link->id) }}">
+
+function getFavIcon( $id ) {
+  $url = Link::find( $id )->link;
+  # $ch = curl_init( $url );
+  # $response = curl_exec( $ch );
+  $f = 'http://www.google.com/s2/favicons?domain=' . $url;
+  $favicon = file_get_contents( $f );
+}
+</code>
+</pre>
+</section>
+
+<section data-auto-animate>
+<h2><span style="color: blue;">CVE-2024-35451</span></h2>
+<pre data-id="code-animation">
+<code data-line-numbers class="language-php">class UserController extends Controller {
+  public function editIcons( Request $request ) {
+    $link = $request->input( ... );
+    $links = new Link;
+    $links->link = $link;
+    $links->user_id = $userId;
+    #
+    # 1. taint entire db 👈
+    #
+    $links->save(); } }
+
+#   <img src="{{ getFavIcon($link->id) }}">
+
+function getFavIcon( $id ) {
+  $url = Link::find( $id )->link;
+  $f = 'http://www.google.com/s2/favicons?domain=' . $url;
+  $favicon = file_get_contents( $f );
+}
+</code>
+</pre>
+</section>
+
+<section data-auto-animate>
+<h2><span style="color: blue;">CVE-2024-35451</span></h2>
+<pre data-id="code-animation">
+<code data-line-numbers class="language-php">class UserController extends Controller {
+  public function editIcons( Request $request ) {
+    $link = $request->input( ... );
+    $links = new Link;
+    $links->link = $link;
+    $links->user_id = $userId;
+    $links->save(); } }
+
+    #
+    # 2. reachable function 👈
+    #
+#   <img src="{{ getFavIcon($link->id) }}">
+
+function getFavIcon( $id ) {
+  $url = Link::find( $id )->link;
+  $f = 'http://www.google.com/s2/favicons?domain=' . $url;
+  $favicon = file_get_contents( $f );
+}
+</code>
+</pre>
+</section>
+
+<section data-auto-animate>
+<h2><span style="color: blue;">CVE-2024-35451</span></h2>
+<pre data-id="code-animation">
+<code data-line-numbers class="language-php">class UserController extends Controller {
+  public function editIcons( Request $request ) {
+    $link = $request->input( ... );
+    $links = new Link;
+    $links->link = $link;
+    $links->user_id = $userId;
+    $links->save(); } }
+
+#   <img src="{{ getFavIcon($link->id) }}">
+
+function getFavIcon( $id ) {
+  $url = Link::find( $id )->link;
+  #
+  # 3. "directional" taint 👈
+  #
+  $f = 'http://www.google.com/s2/favicons?domain=' . $url;
+  $favicon = file_get_contents( $f );
+}
+</code>
+</pre>
+</section>
+
+<section data-auto-animate>
+<h2><span style="color: blue;">CVE-2024-35451</span></h2>
+<pre data-id="code-animation">
+<code data-line-numbers="6" class="language-php">function getFavIcon( $id ) {
+  $url = Link::find( $id )->link;
+  #
+  # 3. "directional" taint 👈
+  #
+  $f = 'http://www.google.com/s2/favicons?domain=' . $url;
+  $favicon = file_get_contents( $f );
+}
+</code>
+</pre>
+</section>
+
+<section data-auto-animate>
+  <h2><span style="color: blue;">CVE-2024-35451</span></h2><br>
+  <table style="margin: 0 auto; border-collapse: collapse; border: 0.5px solid lightgreen;">
+    <tbody>
+      <tr>
+        <td colspan="1" style="border: 0.5px solid lightgreen; padding: 0.5em; text-align: center;"><em>tainted database</em></td>
+        <td colspan="2" style="border: 0.5px solid lightgreen; padding: 0.5em; text-align: center;"><em>reachability</em></td>
+      </tr>
+      <tr>
+        <td colspan="3" style="border: 0.5px solid lightgreen; padding: 0.5em; text-align: center;">
+          <em>html / code hybrids</em>
+        </td>
+      </tr>
+      <tr>
+        <td style="border: 0.5px solid lightgreen; padding: 0.5em; text-align: center;"><em>.blade.php</em></td>
+        <td style="border: 0.5px solid lightgreen; padding: 0.5em; text-align: center;"><em>.erb</em></td>
+        <td style="border: 0.5px solid lightgreen; padding: 0.5em; text-align: center;"><em>...</em></td>
+      </tr>
+      <tr>
+        <td colspan="3" style="border: 0.5px solid lightgreen; padding: 0.5em; text-align: center;">
+          <em>"directional" taint</em>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </section>
 
 <section data-auto-animate>
@@ -822,52 +1006,6 @@ class File( Resource ):
 <p><em>Alan M. Turing</em></p>
 </section>
 
-<section>
-<h2><em><span style="color: blue;">Turing</span></em></h2>
-<table style="border-collapse: collapse;">
-  <tr>
-    <td style="text-align: left; padding: 4px;"><em>Halts</em></td>
-    <td style="text-align: left; padding: 4px;">&nbsp;</td>
-    <td style="text-align: left; padding: 4px;">&nbsp;</td>
-    <td style="text-align: left; padding: 4px;">&nbsp;</td>
-    <td style="text-align: left; padding: 4px;">&nbsp;</td>
-    <td style="text-align: left; padding: 4px;">❔</td>
-  </tr>
-  <tr>
-    <td style="text-align: left; padding: 4px;"><em>Branch taken</em></td>
-    <td style="text-align: left; padding: 4px;">&nbsp;</td>
-    <td style="text-align: left; padding: 4px;">&nbsp;</td>
-    <td style="text-align: left; padding: 4px;">&nbsp;</td>
-    <td style="text-align: left; padding: 4px;">&nbsp;</td>
-    <td style="text-align: left; padding: 4px;">🤷</td>
-  </tr>
-  <tr>
-    <td style="text-align: left; padding: 4px;"><em>Reachable</em></td>
-    <td style="text-align: left; padding: 4px;">&nbsp;</td>
-    <td style="text-align: left; padding: 4px;">&nbsp;</td>
-    <td style="text-align: left; padding: 4px;">&nbsp;</td>
-    <td style="text-align: left; padding: 4px;">&nbsp;</td>
-    <td style="text-align: left; padding: 4px;">❔</td>
-  </tr>
-  <tr>
-    <td style="text-align: left; padding: 4px;"><em>Vulnerable</em></td>
-    <td style="text-align: left; padding: 4px;">&nbsp;</td>
-    <td style="text-align: left; padding: 4px;">&nbsp;</td>
-    <td style="text-align: left; padding: 4px;">&nbsp;</td>
-    <td style="text-align: left; padding: 4px;">&nbsp;</td>
-    <td style="text-align: left; padding: 4px;">🤷</td>
-  </tr>
-  <tr>
-    <td style="text-align: left; padding: 4px;"><em>Imported 3rd party</em></td>
-    <td style="text-align: left; padding: 4px;">&nbsp;</td>
-    <td style="text-align: left; padding: 4px;">&nbsp;</td>
-    <td style="text-align: left; padding: 4px;">&nbsp;</td>
-    <td style="text-align: left; padding: 4px;">&nbsp;</td>
-    <td style="text-align: left; padding: 4px;">❔</td>
-  </tr>
-</table>
-</section>
-
 <section data-auto-animate>
 <h3><em><span style="color: blue;">Example</span></em></h3>
 <pre data-id="code-animation">
@@ -908,26 +1046,6 @@ class File( Resource ):
                 with open(fname, 'wb') as f:
                     for chunk in r.iter_content():
                         f.write(chunk)
-
-</code>
-</pre>
-</section>
-
-<section data-auto-animate>
-<h3><em><span style="color: blue;">Example</span></em></h3>
-<pre data-id="code-animation">
-<code class="language-bash">┌──── ○○○ ────┐
-│ ***grep CLI │
-└─────────────┘
-
-✔ ***grep OSS
-  ✔ Basic security coverage first-party code vulnerabilities.
-
-❯❯❱ go.lang.security.audit.dangerous-exec-command
-    ...
-    Audit the input to 'exec.Command'.
-
-414┆ cmd := exec.CommandContext(timeoutCtx, ffmpeg, params...)
 
 </code>
 </pre>
@@ -1079,13 +1197,6 @@ justify-items: center;
 </svg>
 </div>
 
-</section>
-
-<section>
-<h2><em>Dataflow</em></h2>
-<p><em>taint analysis</em></p>
-<p><em>cross file</em></p>
-<p><em>interprocedural</em></p>
 </section>
 
 <section>
