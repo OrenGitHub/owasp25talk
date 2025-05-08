@@ -521,30 +521,6 @@ class LoginHandler( BaseHandler ):
   </table>
 </section>
 
-<section>
-<div style="display: flex; justify-content: center; align-items: center; gap: 2.5rem;">
-<img src="images/javascript_logo.svg" height="80">
-<img src="images/java_logo.svg" height="80" style="transform: scale(1.8) translateY(-13px);">
-<img src="images/typescript_logo.svg" height="80">
-<img src="images/php_logo.svg" height="80" style="transform: scale(1.1);">
-<img src="images/ruby_logo.svg" height="80">
-<img src="images/golang_logo.svg" height="80" style="transform: scale(1.5) translateY(-3px);">
-<img src="images/python_logo.svg" height="80" style="transform: scale(1.2);">
-<img src="images/csharp_logo.svg" height="80" style="transform: scale(1.2);">
-</div>
-
-<table style="
-    margin: 4rem auto 0 auto;
-    font-family: Consolas, Menlo, 'DejaVu Sans Mono', 'Liberation Mono', monospace;
-    font-weight: 300;
-    border-collapse: collapse;
-">
-<tr><td style="font-size: 4rem; padding: 0.15em 0;">unification</td></tr>
-<tr><td style="font-size: 4rem; padding: 0.15em 0;">know. base</td></tr>
-<tr><td style="font-size: 4rem; padding: 0.15em 0;">queries</td></tr>
-</table>
-</section>
-
 <section data-auto-animate>
 <h2 style="text-transform: none;">RCE &nbsp;&nbsp;&nbsp; <span style="color: blue;">CVE-2023-34105</span></h2><br>
 <h3 style="text-transform: none;">Intermediate Example</h3>
@@ -652,6 +628,59 @@ func (v *SnapshotJob) do(ffmpeg, inputUrl string) (err error) {
       </tr>
     </tbody>
   </table>
+</section>
+
+<section>
+<div style="display: flex; justify-content: center; align-items: center; gap: 2.5rem;">
+<img src="images/javascript_logo.svg" height="80">
+<img src="images/java_logo.svg" height="80" style="transform: scale(1.8) translateY(-13px);">
+<img src="images/typescript_logo.svg" height="80">
+<img src="images/php_logo.svg" height="80" style="transform: scale(1.1);">
+<img src="images/ruby_logo.svg" height="80">
+<img src="images/golang_logo.svg" height="80" style="transform: scale(1.5) translateY(-3px);">
+<img src="images/python_logo.svg" height="80" style="transform: scale(1.2);">
+<img src="images/csharp_logo.svg" height="80" style="transform: scale(1.2);">
+</div>
+
+<table style="
+    margin: 4rem auto 0 auto;
+    font-family: Consolas, Menlo, 'DejaVu Sans Mono', 'Liberation Mono', monospace;
+    font-weight: 300;
+    border-collapse: collapse;
+">
+<tr><td style="font-size: 4rem; padding: 0.15em 0;">unification</td></tr>
+<tr><td style="font-size: 4rem; padding: 0.15em 0;">know. base</td></tr>
+<tr><td style="font-size: 4rem; padding: 0.15em 0;">queries</td></tr>
+</table>
+</section>
+
+<section data-auto-animate>
+<h2 style="text-align: center; text-transform: none;">State</h2>
+
+<div style="
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin-top: 2rem;
+">
+<img src="images/crowded_swimming_pool.png" style="max-width: 45%; border-radius: 8px;">
+</div>
+</section>
+
+<section data-auto-animate>
+<h2 style="text-align: center; text-transform: none;">State</h2>
+
+<div style="
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin-top: 2rem;
+">
+<img src="images/crowded_swimming_pool.png" style="max-width: 45%; border-radius: 8px;">
+<img src="images/ideal_swimming_pool.png" style="max-width: 45%; border-radius: 8px;">
+</div>
 </section>
 
 <section data-auto-animate>
@@ -804,6 +833,48 @@ function getFavIcon( $id ) {
 </section>
 
 <section data-auto-animate>
+<h2 style="text-transform: none;">SSRF &nbsp;&nbsp;&nbsp; <span style="color: blue;">CVE-2024-35451</span></h2>
+<pre data-id="code-animation">
+<code data-line-numbers="6" class="language-php">function getFavIcon( $id ) {
+  $url = Link::find( $id )->link;
+  #
+  # 3. "directional" taint 👈
+  #
+  $f = 'http://www.google.com/s2/favicons?domain=' . $url;
+  $favicon = file_get_contents( $f );
+}
+</code>
+</pre>
+<h2 style="text-transform: none;">File Write &nbsp;&nbsp;&nbsp; <span style="color: blue;">CVE-2024-31451</span></h2>
+</section>
+
+<section data-auto-animate>
+<h2 style="text-transform: none;">SSRF &nbsp;&nbsp;&nbsp; <span style="color: blue;">CVE-2024-35451</span></h2>
+<pre data-id="code-animation">
+<code data-line-numbers="6" class="language-php">function getFavIcon( $id ) {
+  $url = Link::find( $id )->link;
+  #
+  # 3. "directional" taint 👈
+  #
+  $f = 'http://www.google.com/s2/favicons?domain=' . $url;
+  $favicon = file_get_contents( $f );
+}
+</code>
+</pre>
+<h2 style="text-transform: none;">File Write &nbsp;&nbsp;&nbsp; <span style="color: blue;">CVE-2024-31451</span></h2>
+<pre data-id="code-animation">
+<code data-line-numbers="6" class="language-python">@user.route("/api/docs_check", methods=["POST"])
+def check_docs():
+
+  data = request.get_json()
+  vectorstore = "vectors/" + data["docs"]
+  with open(vectorstore + "index.faiss", "wb") as f:
+    f.write(...)
+</code>
+</pre>
+</section>
+
+<section data-auto-animate>
   <h2 style="text-transform: none;">SSRF &nbsp;&nbsp;&nbsp; <span style="color: blue;">CVE-2024-35451</span></h2><br>
   <table style="margin: 0 auto; border-collapse: collapse; border: 0.5px solid lightgreen;">
     <tbody>
@@ -839,10 +910,11 @@ func Plist(c *gin.Context) {
 
   linkName_1    := strings.TrimSuffix(c.Param("link"),".plist")
   linkName_2, _ := utils.SafeAtob( linkName_1 )
-  linkName_3    := strings.Split( linkName_2, "/" )
-  linkName_4    := linkName_3[0]
-  linkName_5, _ := url.PathUnescape( linkName_4 )
-  linkName_6, _ := url.Parse( linkName_5 )
+  linkName_3    := ...
+  linkName_4    := ...
+  linkName_5, _ := ...
+  linkName_6, _ := ...
+
   Url := linkName_6.String()
 
   plist := fmt.Sprintf(`<... version="1.0" ... %s ...>`, Url)
@@ -861,10 +933,11 @@ func Plist(c *gin.Context) {
 
   linkName_1    := strings.TrimSuffix(c.Param("link"),".plist")
   linkName_2, _ := utils.SafeAtob( linkName_1 )
-  linkName_3    := strings.Split( linkName_2, "/" )
-  linkName_4    := linkName_3[0]
-  linkName_5, _ := url.PathUnescape( linkName_4 )
-  linkName_6, _ := url.Parse( linkName_5 )
+  linkName_3    := ...
+  linkName_4    := ...
+  linkName_5, _ := ...
+  linkName_6, _ := ...
+
   Url := linkName_6.String()
 
   Url = strings.ReplaceAll(Url, "<", "[")
@@ -886,10 +959,11 @@ func Plist(c *gin.Context) {
 
   linkName_1    := strings.TrimSuffix(c.Param("link"),".plist")
   linkName_2, _ := utils.SafeAtob( linkName_1 )
-  linkName_3    := strings.Split( linkName_2, "/" )
-  linkName_4    := linkName_3[0]
-  linkName_5, _ := url.PathUnescape( linkName_4 )
-  linkName_6, _ := url.Parse( linkName_5 )
+  linkName_3    := ...
+  linkName_4    := ...
+  linkName_5, _ := ...
+  linkName_6, _ := ...
+
   Url := linkName_6.String()
 
   //
@@ -966,60 +1040,6 @@ const Login = () => {
 <section data-auto-animate>
 <h2><span style="color: blue;">CVE-2023-50731</span></h2>
 <pre data-id="code-animation">
-<code data-line-numbers class="language-python">from flask_restx import Resource
-
-class File( Resource ):
-    def put(self, ... ):
-        data = {}
-        if ... :
-            data = request.json
-
-        if ... :
-
-            url = data['source']
-            data['file'] = data['name']
-
-            with requests.get(url, stream=True) as r:
-                fname = os.path.join(temp_dir, data['file'])
-
-                with open(fname, 'wb') as f:
-                    for chunk in r.iter_content():
-                        f.write(chunk)
-
-</code>
-</pre>
-</section>
-
-<section data-auto-animate>
-<h2><span style="color: blue;">CVE-2023-50731</span></h2>
-<pre data-id="code-animation">
-<code data-line-numbers class="language-python">from flask_restx import Resource
-
-class File( Resource ):
-    def put(self, ... ):
-        data = {}
-        if ... :
-            data = request.json
-
-        if ... :
-
-            url = data['source']
-            data['file'] = clear_filename(data['name'])
-
-            with requests.get(url, stream=True) as r:
-                fname = os.path.join(temp_dir, data['file'])
-
-                with open(fname, 'wb') as f:
-                    for chunk in r.iter_content():
-                        f.write(chunk)
-
-</code>
-</pre>
-</section>
-
-<section data-auto-animate>
-<h2><span style="color: blue;">CVE-2023-50731</span></h2>
-<pre data-id="code-animation">
 <code data-line-numbers class="language-python">def clear_filename(filename: str) -> str:
     """
     Removes path symbols from filename which
@@ -1034,112 +1054,6 @@ class File( Resource ):
     for c in badchars:
         filename = filename.replace(c, '')
     return filename
-</code>
-</pre>
-</section>
-
-<section>
-<h2><span style="color: blue;">History</span></h2>
-<p><em>Big bang 💥</em></p>
-<p><em>Dinosaurs 🦕</em></p>
-<p><em>Alan M. Turing</em></p>
-</section>
-
-<section data-auto-animate>
-<h3><em><span style="color: blue;">Example</span></em></h3>
-<pre data-id="code-animation">
-<code data-line-numbers class="language-python">
-                with open(fname, 'wb') as f:
-                    for chunk in r.iter_content():
-                        f.write(chunk)
-
-</code>
-</pre>
-</section>
-
-<section data-auto-animate>
-<h3><em><span style="color: blue;">Example</span></em></h3>
-<pre data-id="code-animation">
-<code data-line-numbers class="language-python">
-            with requests.get(url, stream=True) as r:
-                fname = os.path.join(temp_dir, data['file'])
-
-                with open(fname, 'wb') as f:
-                    for chunk in r.iter_content():
-                        f.write(chunk)
-
-</code>
-</pre>
-</section>
-
-<section data-auto-animate>
-<h3><em><span style="color: blue;">Example</span></em></h3>
-<pre data-id="code-animation">
-<code data-line-numbers class="language-python">
-            url = data['source']
-            data['file'] = data['name']
-
-            with requests.get(url, stream=True) as r:
-                fname = os.path.join(temp_dir, data['file'])
-
-                with open(fname, 'wb') as f:
-                    for chunk in r.iter_content():
-                        f.write(chunk)
-
-</code>
-</pre>
-</section>
-
-<section data-auto-animate>
-<h3><em><span style="color: blue;">Example</span></em></h3>
-<pre data-id="code-animation">
-<code data-line-numbers class="language-python">
-    def put(self, name: str):
-        data = {}
-        if nondet():
-            data = request.json
-
-        if nondet():
-
-            url = data['source']
-            data['file'] = data['name']
-
-            with requests.get(url, stream=True) as r:
-                fname = os.path.join(temp_dir, data['file'])
-
-                with open(fname, 'wb') as f:
-                    for chunk in r.iter_content():
-                        f.write(chunk)
-
-</code>
-</pre>
-</section>
-
-<section data-auto-animate>
-<h3><em><span style="color: blue;">Example</span></em></h3>
-<pre data-id="code-animation">
-<code data-line-numbers class="language-python">
-from flask_restx import Resource
-
-class File( Resource ):
-
-    def put(self, name: str):
-        data = {}
-        if nondet():
-            data = request.json
-
-        if nondet():
-
-            url = data['source']
-            data['file'] = data['name']
-
-            with requests.get(url, stream=True) as r:
-                fname = os.path.join(temp_dir, data['file'])
-
-                with open(fname, 'wb') as f:
-                    for chunk in r.iter_content():
-                        f.write(chunk)
-
 </code>
 </pre>
 </section>
@@ -1238,9 +1152,6 @@ justify-items: center;
 
 </section>
 
-<section>
-Slide 2
-</section>
 </div>
 </div>
 
