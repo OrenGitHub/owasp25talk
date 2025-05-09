@@ -1008,8 +1008,6 @@ def check_docs():
 <h2 style="text-transform: none;">
 Loops
 <img src="images/broom.svg" style="height: 1em; vertical-align: -0.4em;">
-&nbsp;&nbsp;&nbsp;
-<span style="color: blue;">CVE-2023-50731</span>
 </h2>
 <pre data-id="code-animation">
 <code data-line-numbers="1-6,14-15" class="language-python">def clear_filename(filename: str) -> str:
@@ -1036,10 +1034,8 @@ class File( Resource ):
 
 <section>
 <h2 style="text-transform: none;">
-Throw
+Throws
 <img src="images/broom.svg" style="height: 1em; vertical-align: -0.4em;">
-&nbsp;&nbsp;&nbsp;
-<span style="color: blue;">CVE-2023-46746</span>
 </h2>
 <pre data-id="code-animation">
 <code data-line-numbers="5-6,14" class="language-python">def raise_if_user_provided_url_unsafe(url: str):
@@ -1063,42 +1059,22 @@ def test_slack_webhook(request):
 </pre>
 </section>
 
-<section data-auto-animate>
-<h2><em><span style="color: blue;">CVE-2023-26494</span></em></h2>
+<section>
+<h2 style="text-transform: none;">
+Inline
+<img src="images/broom.svg" style="height: 1em; vertical-align: -0.4em;">
+</h2>
 <pre data-id="code-animation">
-<code data-line-numbers class="language-javascript">const url = ( location ) => {
+<code data-line-numbers="6-8,10-11,19" class="language-javascript">const url = ( location ) => {
 
-  const query = Query.parse(location.search)
-  const next = query.n || appRoot
+  const next = Query.parse( location.search ).n || appRoot
 
-  return next
-}
-
-const Login = () => {
-
-  const location = useLocation()
-  const handleSubmit = useCallback( async ( ... ) => {
-
-    try {
-
-      window.location = url(location)
-</code>
-</pre>
-</section>
-
-<section data-auto-animate>
-<h2><span style="color: blue;">CVE-2023-26494</span></h2>
-<pre data-id="code-animation">
-<code data-line-numbers class="language-javascript">const url = ( location ) => {
-
-  const query = Query.parse(location.search)
-  const next = query.n || appRoot
-
-  // Only allow relative redirects to prevent open redirects.
+  // sanitation
   if (!next.startsWith('/') || next.startsWith('//')) {
     return appRoot
   }
 
+  // join
   return next
 }
 
@@ -1106,39 +1082,8 @@ const Login = () => {
 
   const location = useLocation()
   const handleSubmit = useCallback( async ( ... ) => {
-
     try {
-
       window.location = url(location)
-</code>
-</pre>
-</section>
-
-<section data-auto-animate>
-<h2><span style="color: blue;">CVE-2023-26494</span></h2>
-<p><em>Partial taint</em></p>
-<p><em>Interprocedural</em></p>
-<p><em>Inline</em></p>
-</section>
-
-<section data-auto-animate>
-<h3><em><span style="color: blue;">CVE-2023-46746&nbsp;&nbsp;(&nbsp;&nbsp;SSRF&nbsp;&nbsp;)</span></em></h3>
-<pre data-id="code-animation">
-<code data-line-numbers class="language-python">
-@require_http_methods(["POST"])
-def test_slack_webhook(request):
-
-    try:
-        body = json.loads(request.body)
-    except (TypeError, json.decoder.JSONDecodeError):
-        return JsonResponse({"error": "..."}, status=400)
-
-    webhook = body.get("webhook")
-
-    try:
-
-        response = requests.post(webhook, verify=False, json=m)
-
 </code>
 </pre>
 </section>
@@ -1159,9 +1104,9 @@ def test_slack_webhook(request):
     font-weight: 300;
     border-collapse: collapse;
 ">
-<tr><td style="font-size: 4rem; padding: 0.15em 0;">unification</td></tr>
-<tr><td style="font-size: 4rem; padding: 0.15em 0;">know. base</td></tr>
-<tr><td style="font-size: 4rem; padding: 0.15em 0;">queries</td></tr>
+<tr><td style="font-size: 4rem; padding: 0.15em 0;">performance</td></tr>
+<tr><td style="font-size: 4rem; padding: 0.15em 0;">privacy</td></tr>
+<tr><td style="font-size: 4rem; padding: 0.15em 0;">cost</td></tr>
 </table>
 </section>
 
