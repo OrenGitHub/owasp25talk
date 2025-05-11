@@ -426,95 +426,6 @@ class LoginHandler( BaseHandler ):
   </table>
 </section>
 
-<section data-auto-animate>
-<h2 style="text-transform: none;">RCE &nbsp;&nbsp;&nbsp; <span style="color: blue;">CVE-2023-34105</span></h2><br>
-<h3 style="text-transform: none;">Motivating Example</h3>
-<div style="display: flex; justify-content: center; align-items: center; gap: 1em; margin-top: 1em;">
-<img src="images/gin_logo.webp" style="height: 3em;">
-<img src="images/golang_word_logo.svg" style="height: 1.5em; transform: translateY(0.4em);">
-</div>
-</section>
-
-<section data-auto-animate>
-<h2 style="text-transform: none;">RCE &nbsp;&nbsp;&nbsp; <span style="color: blue;">CVE-2023-34105</span></h2>
-<pre data-id="code-animation">
-<code data-line-numbers class="language-golang">func (v *SnapshotJob) do(ffmpeg, inputUrl string) (err error) {
-
-    param := fmt.Sprintf(
-        "%v -i %v -vf fps=1 -vcodec png -f image2 ... ",
-        ffmpeg,
-        inputUrl,
-        v.vframes,
-        normalPicPath
-    )
-    
-    cmd := exec.CommandContext(ctx, "/bin/bash", "-c", param)
-    if err = cmd.Run(); err != nil { ... }
-}
-</code>
-</pre>
-</section>
-
-<section data-auto-animate>
-<h2 style="text-transform: none;">RCE &nbsp;&nbsp;&nbsp; <span style="color: blue;">CVE-2023-34105</span></h2>
-<pre data-id="code-animation">
-<code data-line-numbers class="language-golang">func (v *SnapshotJob) do(ffmpeg, inputUrl string) (err error) {
-
-    param := fmt.Sprintf(
-        "-i %v -vf fps=1 -vcodec png -f image2 ... ",
-        inputUrl,
-        v.vframes,
-        normalPicPath
-    )
-
-    // cmd := exec.CommandContext(ctx, "/bin/bash", "-c", param)    
-    cmd := exec.CommandContext(ctx, ffmpeg, param)
-    if err = cmd.Run(); err != nil { ... }
-}
-</code>
-</pre>
-</section>
-
-<section data-auto-animate>
-<h2 style="text-transform: none;">RCE &nbsp;&nbsp;&nbsp; <span style="color: blue;">CVE-2023-34105</span></h2>
-<pre data-id="code-animation">
-<code data-line-numbers class="language-golang">//
-// interprocedural taint analysis 👈
-//
-func (v *SnapshotJob) do(ffmpeg, inputUrl string) (err error) {
-
-    param := fmt.Sprintf(
-        "-i %v -vf fps=1 -vcodec png -f image2 ... ",
-        inputUrl,
-        v.vframes,
-        normalPicPath
-    )
-
-    // cmd := exec.CommandContext(ctx, "/bin/bash", "-c", param)    
-    cmd := exec.CommandContext(ctx, ffmpeg, param)
-    if err = cmd.Run(); err != nil { ... }
-}
-</code>
-</pre>
-</section>
-
-<section data-auto-animate>
-  <h2 style="text-transform: none;">RCE &nbsp;&nbsp;&nbsp; <span style="color: blue;">CVE-2023-34105</span></h2><br>
-  <table style="margin: 0 auto; border-collapse: collapse; border: 0.5px solid lightgreen;">
-    <tbody>
-      <tr>
-        <td style="border: 0.5px solid lightgreen; padding: 0.5em; text-align: center;"><em>interprocedural</em></td>
-        <td style="border: 0.5px solid lightgreen; padding: 0.5em; text-align: center;"><em>taint analysis</em></td>
-      </tr>
-      <tr>
-        <td colspan="2" style="border: 0.5px solid lightgreen; padding: 0.5em; text-align: center;">
-          <em>syntax / shape</em>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</section>
-
 <section>
 <div style="display: flex; justify-content: center; align-items: center; gap: 2.5rem;">
 <img src="images/javascript_logo.svg" height="80">
@@ -561,7 +472,7 @@ func (v *SnapshotJob) do(ffmpeg, inputUrl string) (err error) {
 
 <section data-auto-animate>
 <h2 style="text-transform: none;">SSRF &nbsp;&nbsp;&nbsp; <span style="color: blue;">CVE-2024-35451</span></h2><br>
-<h3 style="text-transform: none;">Intermediate Example</h3>
+<h3 style="text-transform: none;">transformers ( concat )</h3>
 <div style="display: flex; justify-content: center; align-items: center; gap: 1em; margin-top: 1em;">
 <img src="images/laravel_logo.svg" style="height: 2.5em;">
 <img src="images/php_logo.svg" style="height: 2em; transform: translateY(0.1em);">
@@ -676,7 +587,7 @@ def check_docs():
 
 <section data-auto-animate>
 <h2>XSS &nbsp;&nbsp;&nbsp; <span style="color: blue;">CVE-2024-47067</span></h2><br>
-<h3 style="text-transform: none;">Intermediate Example</h3>
+<h3 style="text-transform: none;">transformers ( call )</h3>
 <div style="display: flex; justify-content: center; align-items: center; gap: 1em; margin-top: 1em;">
 <img src="images/gin_logo.webp" style="height: 3em;">
 <img src="images/golang_word_logo.svg" style="height: 1.5em; transform: translateY(0.4em);">
@@ -855,15 +766,18 @@ def test_slack_webhook(request):
 </td>
 </tr>
 <tr>
-<td colspan="5" style="border: 0.5px solid lightgreen; padding: 0.5em; text-align: center;">
-<em>context &nbsp; sensitive &nbsp; transformers</em></td>
+<td id="concat" colspan="5" style="border: 0.5px solid lightgreen; padding: 0.5em; text-align: center;">
+<em>context &nbsp; sensitive &nbsp; transformers<sup style="font-size: 0.6em; color: red; margin-left: 0.3em;">TP</sup></em>
+</td>
 </tr>
 <tr>
 <td style="border: 0.5px solid lightgreen; padding: 0.5em; text-align: center;"><em>html / code</em></td>
 <td style="border: 0.5px solid lightgreen; padding: 0.5em; text-align: center;"><em>types</em></td>
 <td style="border: 0.5px solid lightgreen; padding: 0.5em; text-align: center;"><em>inline</em></td>
 <td style="border: 0.5px solid lightgreen; padding: 0.5em; text-align: center;"><em>loops</em></td>
-<td style="border: 0.5px solid lightgreen; padding: 0.5em; text-align: center;"><em>throws</em></td>
+<td id="throws-cell" style="border: 0.5px solid lightgreen; padding: 0.5em; text-align: center;">
+<em>throws<sup style="font-size: 0.6em; color: red; margin-left: 0.3em;">FP</sup></em>
+</td>
 </tr>
 </tbody>
 </table>
